@@ -15,6 +15,7 @@ namespace Bevasarlo
         public bool Vegan { get; set; }
         public bool Glutenmentes { get; set; }
         public string Egyeb { get; set; }
+
     }
 
 }

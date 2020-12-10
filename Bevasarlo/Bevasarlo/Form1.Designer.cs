@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBoxTermek = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxMennyi = new System.Windows.Forms.TextBox();
@@ -50,19 +49,13 @@
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.cbTermek = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
-            // 
-            // textBoxTermek
-            // 
-            this.textBoxTermek.Location = new System.Drawing.Point(12, 41);
-            this.textBoxTermek.Name = "textBoxTermek";
-            this.textBoxTermek.Size = new System.Drawing.Size(190, 22);
-            this.textBoxTermek.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 21);
+            this.label1.Location = new System.Drawing.Point(12, 83);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 17);
             this.label1.TabIndex = 1;
@@ -140,7 +133,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 338);
+            this.button1.Location = new System.Drawing.Point(12, 376);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(114, 42);
             this.button1.TabIndex = 11;
@@ -237,25 +230,35 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 103);
+            this.comboBox1.Location = new System.Drawing.Point(12, 41);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(190, 24);
             this.comboBox1.TabIndex = 21;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 80);
+            this.label5.Location = new System.Drawing.Point(12, 21);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 17);
             this.label5.TabIndex = 22;
             this.label5.Text = "Típus";
+            // 
+            // cbTermek
+            // 
+            this.cbTermek.FormattingEnabled = true;
+            this.cbTermek.Location = new System.Drawing.Point(12, 103);
+            this.cbTermek.Name = "cbTermek";
+            this.cbTermek.Size = new System.Drawing.Size(190, 24);
+            this.cbTermek.TabIndex = 23;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cbTermek);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.checkBox6);
@@ -277,7 +280,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxMennyi);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBoxTermek);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -286,8 +288,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox textBoxTermek;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxMennyi;
@@ -309,6 +309,7 @@
         private System.Windows.Forms.CheckBox checkBox6;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cbTermek;
     }
 }
 

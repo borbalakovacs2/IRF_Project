@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bevasarlo.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,11 +28,21 @@ namespace Bevasarlo
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
             switch (comboBox1.SelectedIndex)
             {
                 case (int)Tipusok.Pektermek:
+                    Pektermek pektermek = new Pektermek();
+                    cbTermek.DataSource = pektermek.termekek;
                     break;
                 case (int)Tipusok.Tejtermek:
+                    Tejtermek tejtermek = new Tejtermek();
+                    cbTermek.DataSource = tejtermek.termekek;
                     break;
                 case (int)Tipusok.ZoldsegGyumolcs:
                     break;
@@ -39,10 +50,7 @@ namespace Bevasarlo
                     break;
                 case (int)Tipusok.Tisztitoszer:
                     break;
-
-
             }
-
         }
     }
 }
