@@ -80,6 +80,7 @@ namespace Bevasarlo
                 case (int)Tipusok.Pektermek:
                     Pektermek pektermek = new Pektermek(cbTermek.Text);
                     termek = pektermek;
+                    cbTermek.DataSource = Termek.pektermekek;
                     break;
                 case (int)Tipusok.Tejtermek:
                     Tejtermek tejtermek = new Tejtermek(cbTermek.Text);
