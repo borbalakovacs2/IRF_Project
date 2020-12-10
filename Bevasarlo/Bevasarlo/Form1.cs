@@ -35,14 +35,19 @@ namespace Bevasarlo
             {
                 termek.Vegan = true;
             }
+            else
+            {
+                termek.Vegan = false;
+            }
             if (cbGluten.Checked == true)
             {
                 termek.Glutenmentes = true;
             }
-            if (tbEgyeb != null)
+            else
             {
-                termek.Egyeb = tbEgyeb.Text;
+                termek.Glutenmentes = false;
             }
+            termek.Egyeb = tbEgyeb.Text;
 
             Termek.termekek.Add(termek);
             var elem = termek.ListahozAd();
@@ -183,6 +188,13 @@ namespace Bevasarlo
                 uncheck();
             }
         }
-    }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //        ???
+            //        ???
+            //        ???
+        }
+}
 }
 
