@@ -48,6 +48,8 @@
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxTermek
@@ -69,7 +71,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 83);
+            this.label2.Location = new System.Drawing.Point(12, 137);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 17);
             this.label2.TabIndex = 3;
@@ -77,14 +79,14 @@
             // 
             // textBoxMennyi
             // 
-            this.textBoxMennyi.Location = new System.Drawing.Point(12, 103);
+            this.textBoxMennyi.Location = new System.Drawing.Point(12, 157);
             this.textBoxMennyi.Name = "textBoxMennyi";
             this.textBoxMennyi.Size = new System.Drawing.Size(56, 22);
             this.textBoxMennyi.TabIndex = 2;
             // 
             // btnPlus
             // 
-            this.btnPlus.Location = new System.Drawing.Point(74, 102);
+            this.btnPlus.Location = new System.Drawing.Point(74, 156);
             this.btnPlus.Name = "btnPlus";
             this.btnPlus.Size = new System.Drawing.Size(23, 23);
             this.btnPlus.TabIndex = 4;
@@ -93,7 +95,7 @@
             // 
             // btnMinus
             // 
-            this.btnMinus.Location = new System.Drawing.Point(103, 102);
+            this.btnMinus.Location = new System.Drawing.Point(103, 156);
             this.btnMinus.Name = "btnMinus";
             this.btnMinus.Size = new System.Drawing.Size(23, 23);
             this.btnMinus.TabIndex = 5;
@@ -103,7 +105,7 @@
             // cbVegan
             // 
             this.cbVegan.AutoSize = true;
-            this.cbVegan.Location = new System.Drawing.Point(12, 145);
+            this.cbVegan.Location = new System.Drawing.Point(12, 199);
             this.cbVegan.Name = "cbVegan";
             this.cbVegan.Size = new System.Drawing.Size(71, 21);
             this.cbVegan.TabIndex = 7;
@@ -113,7 +115,7 @@
             // cbGluten
             // 
             this.cbGluten.AutoSize = true;
-            this.cbGluten.Location = new System.Drawing.Point(12, 172);
+            this.cbGluten.Location = new System.Drawing.Point(12, 226);
             this.cbGluten.Name = "cbGluten";
             this.cbGluten.Size = new System.Drawing.Size(118, 21);
             this.cbGluten.TabIndex = 8;
@@ -123,7 +125,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 210);
+            this.label3.Location = new System.Drawing.Point(12, 264);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(103, 17);
             this.label3.TabIndex = 10;
@@ -131,19 +133,20 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 230);
+            this.textBox1.Location = new System.Drawing.Point(12, 284);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(190, 22);
             this.textBox1.TabIndex = 9;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 284);
+            this.button1.Location = new System.Drawing.Point(12, 338);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(114, 42);
             this.button1.TabIndex = 11;
             this.button1.Text = "Listához ad";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // listBoxTermekek
             // 
@@ -231,11 +234,30 @@
             this.checkBox6.Text = "Mind";
             this.checkBox6.UseVisualStyleBackColor = true;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(12, 103);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.TabIndex = 21;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 80);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(43, 17);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Típus";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.checkBox6);
             this.Controls.Add(this.checkBox5);
             this.Controls.Add(this.checkBox4);
@@ -285,6 +307,8 @@
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label5;
     }
 }
 
