@@ -6,8 +6,30 @@ using System.Threading.Tasks;
 
 namespace Bevasarlo.Entities
 {
-    class ZoldsegGyumolcs
+    class ZoldsegGyumolcs : Termek
     {
-        public string[] termekek = { "Paradicsom", "Kígyóuborka", "Saláta", "Burgonya", "Hagyma", "Alma", "Banán", "Körte", "Citrom", "Narancs" };
+        public ZoldsegGyumolcs(string nev)
+        {
+            this.Nev = nev;
+            switch (nev)
+            {
+                case "Kígyóuborka":
+                    this.Mertekegyseg = "db";
+                    break;
+                case "Citrom":
+                    this.Mertekegyseg = "db";
+                    break;
+                case "Saláta":
+                    this.Mertekegyseg = "db";
+                    break;
+                case "Hagyma":
+                    this.Mertekegyseg = "db";
+                    break;
+                default:
+                    this.Mertekegyseg = "kg";
+                    break;
+            }
+            this.MennyisegEmelo = this.Mennyiseg;
+        }
     }
 }

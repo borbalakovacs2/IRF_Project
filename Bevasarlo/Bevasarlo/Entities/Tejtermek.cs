@@ -6,8 +6,26 @@ using System.Threading.Tasks;
 
 namespace Bevasarlo.Entities
 {
-    class Tejtermek : Termek
+    class Tejtermek : Termek 
     {
-        public string[] termekek = { "Tej", "Sajt", "Joghurt", "Tejföl" };
+        public Tejtermek(string nev)
+        {
+            this.Nev = nev;
+            switch (nev)
+            {
+                case "Tej":
+                    this.Mertekegyseg = "l";
+                    break;
+                case "Sajt":
+                    this.Mertekegyseg = "dkg";
+                    this.Mennyiseg = 25;
+                    break;
+                default:
+                    this.Mertekegyseg = "g";
+                    this.Mennyiseg = 100;
+                    break;
+            }
+            this.MennyisegEmelo = this.Mennyiseg;
+        }
     }
 }

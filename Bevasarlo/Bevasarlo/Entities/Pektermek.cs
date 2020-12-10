@@ -8,6 +8,19 @@ namespace Bevasarlo.Entities
 {
     class Pektermek : Termek
     {
-        public string[] termekek = { "Kenyér", "Zsemle", "Kifli", "Pogácsa", "Kakaós csiga" };
+        public Pektermek(string nev)
+        {
+            this.Nev = nev;
+            switch (nev)
+            {
+                case "Kenyér":
+                    this.Mertekegyseg = "kg";
+                    break;
+                default:
+                    this.Mertekegyseg = "db";
+                    break;
+            }
+            this.MennyisegEmelo = this.Mennyiseg;
+        }
     }
 }
