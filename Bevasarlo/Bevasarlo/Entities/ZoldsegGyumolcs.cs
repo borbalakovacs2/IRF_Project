@@ -11,25 +11,14 @@ namespace Bevasarlo.Entities
         public ZoldsegGyumolcs(string nev)
         {
             this.Nev = nev;
-            switch (nev)
+            if (nev == "Kígyóuborka" || nev == "Citrom" || nev == "Saláta" || nev == "Hagyma")
             {
-                case "Kígyóuborka":
-                    this.Mertekegyseg = "db";
-                    break;
-                case "Citrom":
-                    this.Mertekegyseg = "db";
-                    break;
-                case "Saláta":
-                    this.Mertekegyseg = "db";
-                    break;
-                case "Hagyma":
-                    this.Mertekegyseg = "db";
-                    break;
-                default:
-                    this.Mertekegyseg = "kg";
-                    break;
+                this.Mertekegyseg = "db";
             }
-            this.MennyisegEmelo = this.Mennyiseg;
+            else
+            {
+                this.Mertekegyseg = "kg";
+            }
         }
     }
 }

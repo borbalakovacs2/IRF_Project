@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Csomagolt.cs" />
+    <Compile Include="Entities\Haztartasi.cs" />
     <Compile Include="Entities\Pektermek.cs" />
     <Compile Include="Entities\Tejtermek.cs" />
     <Compile Include="Entities\ZoldsegGyumolcs.cs" />

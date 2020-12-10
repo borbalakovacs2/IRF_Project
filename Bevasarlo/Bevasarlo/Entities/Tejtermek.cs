@@ -11,19 +11,14 @@ namespace Bevasarlo.Entities
         public Tejtermek(string nev)
         {
             this.Nev = nev;
-            switch (nev)
+            if (nev == "Tej")
             {
-                case "Tej":
-                    this.Mertekegyseg = "l";
-                    break;
-                case "Sajt":
-                    this.Mertekegyseg = "dkg";
-                    this.Mennyiseg = 25;
-                    break;
-                default:
-                    this.Mertekegyseg = "g";
-                    this.Mennyiseg = 100;
-                    break;
+                this.Mertekegyseg = "l";
+            }
+            else
+            {
+                this.Mertekegyseg = "g";
+                this.Mennyiseg = 100;
             }
             this.MennyisegEmelo = this.Mennyiseg;
         }

@@ -11,16 +11,14 @@ namespace Bevasarlo.Entities
         public Pektermek(string nev)
         {
             this.Nev = nev;
-            switch (nev)
+            if (nev == "Kenyér")
             {
-                case "Kenyér":
-                    this.Mertekegyseg = "kg";
-                    break;
-                default:
-                    this.Mertekegyseg = "db";
-                    break;
+                this.Mertekegyseg = "kg";
             }
-            this.MennyisegEmelo = this.Mennyiseg;
+            else
+            {
+                this.Mertekegyseg = "db";
+            }
         }
     }
 }

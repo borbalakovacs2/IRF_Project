@@ -11,8 +11,10 @@ namespace Bevasarlo
     class Termek
     {
         public static string[] zoldsegGyumolcs = { "Paradicsom", "Kígyóuborka", "Saláta", "Burgonya", "Hagyma", "Alma", "Banán", "Körte", "Citrom", "Narancs" };
-        public static string[] tejtermekek = { "Tej", "Sajt", "Joghurt", "Tejföl" };
+        public static string[] tejtermekek = { "Tej", "Sajt", "Joghurt", "Tejföl", "Vaj" };
         public static string[] pektermekek = { "Kenyér", "Zsemle", "Kifli", "Pogácsa", "Kakaós csiga" };
+        public static string[] csomagolt = { "Sonka", "Tojás", "Sör", "Nógrádi ropi", "Fagyasztott zöldség", "Csokoládé" };
+        public static string[] haztartasi = { "Mosópor", "Öblítő", "WC papír", "Tisztítószer", "Papírzsebkendő"};
         public static List<Termek> termekek = new List<Termek>();
 
         public string Nev { get; set; }
@@ -48,7 +50,7 @@ namespace Bevasarlo
                 {
                     elem = elem + ", gluténmentes";
                 }
-                if (this.Egyeb != null)
+                if (this.Egyeb != "")
                 {
                     elem = elem + ", " + this.Egyeb;
                 }

@@ -26,7 +26,7 @@ namespace Bevasarlo
                                   "Tisztítószer, háztartási kellék"};
 
             comboBox1.DataSource = tipusok;
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -64,10 +64,13 @@ namespace Bevasarlo
                     cbTermek.DataSource = Termek.tejtermekek;
                     break;
                 case (int)Tipusok.ZoldsegGyumolcs:
+                    cbTermek.DataSource = Termek.zoldsegGyumolcs;
                     break;
                 case (int)Tipusok.Csomagolt:
+                    cbTermek.DataSource = Termek.csomagolt;
                     break;
                 case (int)Tipusok.Tisztitoszer:
+                    cbTermek.DataSource = Termek.haztartasi;
                     break;
             }
         }
@@ -80,21 +83,22 @@ namespace Bevasarlo
                 case (int)Tipusok.Pektermek:
                     Pektermek pektermek = new Pektermek(cbTermek.Text);
                     termek = pektermek;
-                    cbTermek.DataSource = Termek.pektermekek;
                     break;
                 case (int)Tipusok.Tejtermek:
                     Tejtermek tejtermek = new Tejtermek(cbTermek.Text);
                     termek = tejtermek;
-                    cbTermek.DataSource = Termek.tejtermekek;
                     break;
                 case (int)Tipusok.ZoldsegGyumolcs:
                     ZoldsegGyumolcs zcs = new ZoldsegGyumolcs(cbTermek.Text);
                     termek = zcs;
-                    cbTermek.DataSource = Termek.zoldsegGyumolcs;
                     break;
                 case (int)Tipusok.Csomagolt:
+                    Csomagolt csomagolt = new Csomagolt(cbTermek.Text);
+                    termek = csomagolt;
                     break;
                 case (int)Tipusok.Tisztitoszer:
+                    Haztartasi haztartasi = new Haztartasi(cbTermek.Text);
+                    termek = haztartasi;
                     break;
             }
 
@@ -105,11 +109,80 @@ namespace Bevasarlo
         private void btnPlus_Click(object sender, EventArgs e)
         {
             termek.Hozzad();
+            tbMennyi.Text = termek.Mennyiseg.ToString();
         }
 
         private void btnMinus_Click(object sender, EventArgs e)
         {
             termek.Kivon();
+            tbMennyi.Text = termek.Mennyiseg.ToString();
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox6.Checked == true)
+            {
+                for (int i = 0; i < listBoxTermekek.Items.Count; i++)
+                {
+                    listBoxTermekek.SetItemChecked(i, true);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < listBoxTermekek.Items.Count; i++)
+                {
+                    listBoxTermekek.SetItemChecked(i, false);
+                }
+            }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked == true)
+            {
+                checkItems("vegán");
+
+            }
+
+            else
+            {
+                uncheck();
+            }
+        }
+        private void checkItems(string toCheck)
+        {
+
+            for (int i = 0; i < listBoxTermekek.Items.Count; i++)
+            {
+                string value = listBoxTermekek.Items[i].ToString();
+                if (value.Contains(toCheck))
+                {
+                    listBoxTermekek.SetItemChecked(i, true);
+                }
+            }
+        }
+        private void uncheck()
+        {
+
+            for (int i = 0; i < listBoxTermekek.Items.Count; i++)
+            {
+                listBoxTermekek.SetItemChecked(i, false);
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                checkItems("gluténmentes");
+
+            }
+
+            else
+            {
+                uncheck();
+            }
         }
     }
 }
+
