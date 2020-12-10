@@ -1,0 +1,10 @@
+C:\Users\kovac\source\repos\IRF_Project\Bevasarlo\Bevasarlo\bin\Debug\Bevasarlo.exe.config
+C:\Users\kovac\source\repos\IRF_Project\Bevasarlo\Bevasarlo\bin\Debug\Bevasarlo.exe
+C:\Users\kovac\source\repos\IRF_Project\Bevasarlo\Bevasarlo\bin\Debug\Bevasarlo.pdb
+C:\Users\kovac\source\repos\IRF_Project\Bevasarlo\Bevasarlo\obj\Debug\Bevasarlo.csprojAssemblyReference.cache
+C:\Users\kovac\source\repos\IRF_Project\Bevasarlo\Bevasarlo\obj\Debug\Bevasarlo.Form1.resources
+C:\Users\kovac\source\repos\IRF_Project\Bevasarlo\Bevasarlo\obj\Debug\Bevasarlo.Properties.Resources.resources
+C:\Users\kovac\source\repos\IRF_Project\Bevasarlo\Bevasarlo\obj\Debug\Bevasarlo.csproj.GenerateResource.cache
+C:\Users\kovac\source\repos\IRF_Project\Bevasarlo\Bevasarlo\obj\Debug\Bevasarlo.csproj.CoreCompileInputs.cache
+C:\Users\kovac\source\repos\IRF_Project\Bevasarlo\Bevasarlo\obj\Debug\Bevasarlo.exe
+C:\Users\kovac\source\repos\IRF_Project\Bevasarlo\Bevasarlo\obj\Debug\Bevasarlo.pdb
