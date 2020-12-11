@@ -48,6 +48,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cbTermek = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -77,7 +80,7 @@
             // 
             // btnPlus
             // 
-            this.btnPlus.Location = new System.Drawing.Point(94, 158);
+            this.btnPlus.Location = new System.Drawing.Point(150, 156);
             this.btnPlus.Name = "btnPlus";
             this.btnPlus.Size = new System.Drawing.Size(23, 23);
             this.btnPlus.TabIndex = 4;
@@ -87,7 +90,7 @@
             // 
             // btnMinus
             // 
-            this.btnMinus.Location = new System.Drawing.Point(123, 158);
+            this.btnMinus.Location = new System.Drawing.Point(179, 156);
             this.btnMinus.Name = "btnMinus";
             this.btnMinus.Size = new System.Drawing.Size(23, 23);
             this.btnMinus.TabIndex = 5;
@@ -128,7 +131,7 @@
             // 
             this.tbEgyeb.Location = new System.Drawing.Point(12, 284);
             this.tbEgyeb.Name = "tbEgyeb";
-            this.tbEgyeb.Size = new System.Drawing.Size(190, 22);
+            this.tbEgyeb.Size = new System.Drawing.Size(266, 22);
             this.tbEgyeb.TabIndex = 9;
             // 
             // button1
@@ -144,14 +147,14 @@
             // listBoxTermekek
             // 
             this.listBoxTermekek.FormattingEnabled = true;
-            this.listBoxTermekek.Location = new System.Drawing.Point(289, 21);
+            this.listBoxTermekek.Location = new System.Drawing.Point(375, 21);
             this.listBoxTermekek.Name = "listBoxTermekek";
             this.listBoxTermekek.Size = new System.Drawing.Size(339, 412);
             this.listBoxTermekek.TabIndex = 12;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(652, 137);
+            this.button2.Location = new System.Drawing.Point(738, 137);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(96, 30);
             this.button2.TabIndex = 13;
@@ -162,7 +165,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(649, 21);
+            this.label4.Location = new System.Drawing.Point(735, 21);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(68, 17);
             this.label4.TabIndex = 14;
@@ -171,7 +174,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(652, 106);
+            this.checkBox1.Location = new System.Drawing.Point(738, 106);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(118, 21);
             this.checkBox1.TabIndex = 16;
@@ -182,7 +185,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(652, 79);
+            this.checkBox2.Location = new System.Drawing.Point(738, 79);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(71, 21);
             this.checkBox2.TabIndex = 15;
@@ -193,7 +196,7 @@
             // checkBox6
             // 
             this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(652, 52);
+            this.checkBox6.Location = new System.Drawing.Point(738, 52);
             this.checkBox6.Name = "checkBox6";
             this.checkBox6.Size = new System.Drawing.Size(60, 21);
             this.checkBox6.TabIndex = 20;
@@ -237,11 +240,42 @@
             this.label6.TabIndex = 24;
             this.label6.Text = "kg";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(143, 376);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(135, 42);
+            this.button3.TabIndex = 25;
+            this.button3.Text = "Recept betöltés";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(738, 199);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(96, 30);
+            this.button4.TabIndex = 26;
+            this.button4.Text = "Exportálás";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(738, 257);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(96, 30);
+            this.button5.TabIndex = 27;
+            this.button5.Text = "Mentés";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(905, 450);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cbTermek);
             this.Controls.Add(this.label5);
@@ -290,6 +324,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbTermek;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
     }
 }
 

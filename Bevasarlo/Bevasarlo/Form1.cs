@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -191,10 +192,40 @@ namespace Bevasarlo
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //        ???
-            //        ???
-            //        ???
+            for (int i = listBoxTermekek.Items.Count - 1; i >= 0; i--)
+            {
+                if (listBoxTermekek.GetItemChecked(i))
+                {
+                    listBoxTermekek.Items.Remove(listBoxTermekek.Items[i]);
+                }
+            }
         }
-}
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var documentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.InitialDirectory = documentPath;
+            ofd.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                var filePath = ofd.FileName;
+                var fileStream = ofd.OpenFile();
+
+                using (StreamReader reader = new StreamReader(fileStream))
+                {
+                    List<string> receptSor = new List<string>();
+                    while (!reader.EndOfStream)
+                    {
+                        var line = reader.ReadLine();
+                        line = line.Remove(line.Length - 1);
+
+                        listBoxTermekek.Items.Add(line);
+                    }
+                }
+            }
+        }
+    }
 }
 
