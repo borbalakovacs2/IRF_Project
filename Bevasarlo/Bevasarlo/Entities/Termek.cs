@@ -24,6 +24,7 @@ namespace Bevasarlo
         public bool Vegan { get; set; }
         public bool Glutenmentes { get; set; }
         public string Egyeb { get; set; }
+        public string DisplayMember { get; set; }
 
         public Termek()
         {
@@ -39,7 +40,7 @@ namespace Bevasarlo
         {
             this.Mennyiseg -= this.MennyisegEmelo;
         }
-        public string ListahozAd()
+        public void ListahozAd()
         {
                 string elem = this.Nev + ' ' + this.Mennyiseg + ' ' + this.Mertekegyseg;
                 if (this.Vegan == true)
@@ -54,7 +55,10 @@ namespace Bevasarlo
                 {
                     elem = elem + ", " + this.Egyeb;
                 }
-            return elem;
+
+            this.DisplayMember = elem;
+            termekek.Add(this);
+
         }
     }
 }

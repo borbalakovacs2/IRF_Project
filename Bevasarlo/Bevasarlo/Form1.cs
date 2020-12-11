@@ -9,11 +9,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Reflection;
 
 namespace Bevasarlo
 {
     public partial class Form1 : Form
     {
+        Excel.Application xlApp;
+        Excel.Workbook xlWB;
+        Excel.Worksheet xlSheet;
+
         Termek termek = new Termek();
         List<string> recept = new List<string>();
 
@@ -50,9 +56,10 @@ namespace Bevasarlo
             }
             termek.Egyeb = tbEgyeb.Text;
 
-            Termek.termekek.Add(termek);
-            var elem = termek.ListahozAd();
-            listBoxTermekek.Items.Add(elem);
+            termek.ListahozAd();
+            listBoxTermekek.DataSource = null;
+            listBoxTermekek.DataSource = Termek.termekek;
+            listBoxTermekek.DisplayMember = "DisplayMember";
 
         }
 
@@ -83,7 +90,6 @@ namespace Bevasarlo
 
         private void cbTermek_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Termek termek = new Termek();
             switch (cbTipus.SelectedIndex)
             {
                 case (int)Tipusok.Pektermek:
@@ -252,8 +258,9 @@ namespace Bevasarlo
                                 {
                                     termek.Egyeb = "";
                                 }
-                                Termek.termekek.Add(termek);
-                                listBoxTermekek.Items.Add(termek.ListahozAd());
+
+                                termek.ListahozAd();
+                                listBoxTermekek.Items.Add(termek);
                             }
                         }
                         catch (Exception ex)
@@ -265,7 +272,7 @@ namespace Bevasarlo
                 }
 
             }
-            
+
         }
 
         private void btnMentes_Click(object sender, EventArgs e)
@@ -275,29 +282,96 @@ namespace Bevasarlo
                 MessageBox.Show("Válaszd ki a termékeket!");
                 return;
             }
-            List<string> lista = new List<string>();
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            sfd.Filter = "Comma Separated Values (*.csv)|*.csv";
-            sfd.FileName = "bevasarlolista.csv";
-            sfd.DefaultExt = "csv";
-            sfd.AddExtension = true;
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    foreach (var item in listBoxTermekek.CheckedItems)
-                    {
-                        lista.Add(item.ToString());
-                    }
-                    File.WriteAllLines(sfd.FileName, lista, Encoding.UTF8);
-                    MessageBox.Show("Sikeres mentés");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Hiba :" + ex.Message);
-                }
-            }
+
+            //CreateExcel();
+
+            //List<string> lista = new List<string>();
+            //SaveFileDialog sfd = new SaveFileDialog();
+            //sfd.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            //sfd.Filter = "Comma Separated Values (*.csv)|*.csv";
+            //sfd.FileName = "bevasarlolista.csv";
+            //sfd.DefaultExt = "csv";
+            //sfd.AddExtension = true;
+            //if (sfd.ShowDialog() == DialogResult.OK)
+            //{
+            //    try
+            //    {
+            //        foreach (var item in listBoxTermekek.CheckedItems)
+            //        {
+            //            lista.Add(item.ToString());
+            //        }
+            //        File.WriteAllLines(sfd.FileName, lista, Encoding.UTF8);
+            //        MessageBox.Show("Sikeres mentés");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show("Hiba :" + ex.Message);
+            //    }
+            //}
+            //}
+            //private void CreateExcel()
+            //{
+            //    try
+            //    {
+            //        xlApp = new Excel.Application();
+            //        xlWB = xlApp.Workbooks.Add(Missing.Value);
+            //        xlSheet = xlWB.ActiveSheet;
+            //        CreateTable();
+            //        xlApp.Visible = true;
+            //        xlApp.UserControl = true;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        string errMsg = string.Format("Error: {0}\nLine: {1}", ex.Message, ex.Source);
+            //        MessageBox.Show(errMsg, "Error");
+
+            //        xlWB.Close(false, Type.Missing, Type.Missing);
+            //        xlApp.Quit();
+            //        xlWB = null;
+            //        xlApp = null;
+            //    }
+            //}
+            //private void CreateTable()
+            //{
+            //    string[] header = new string[] {
+            //        "Termék neve",
+            //        "Mennyiség",
+            //        "Mértékegység",
+            //        "Vegán",
+            //        "Gluténmentes"
+            //    };
+
+            //    for(int i = 0; i < header.Length; i++)
+            //    {
+            //        xlSheet.Cells[1, i + 1] = header[i];
+            //    }
+
+            //    object[,] values = new object[Termek.termekek.Count, header.Length];
+            //    int counter = 0;
+            //    foreach (var f in Flats)
+            //    {
+            //        values[counter, 0] = f.Code;
+            //        values[counter, 1] = f.Vendor;
+            //        values[counter, 2] = f.Side;
+            //        values[counter, 3] = f.District;
+            //        if (f.Elevator == true)
+            //        {
+            //            values[counter, 4] = "Van";
+            //        }
+            //        else
+            //        {
+            //            values[counter, 4] = "Nincs";
+            //        }
+            //        values[counter, 5] = f.NumberOfRooms;
+            //        values[counter, 6] = f.FloorArea;
+            //        values[counter, 7] = f.Price;
+            //        values[counter, 8] = "=" + GetCell(counter + 2, 7) + "*" + GetCell(counter + 2, 8);
+            //        counter++;
+            //    }
+            //    xlSheet.get_Range(
+            //        GetCell(2, 1),
+            //        GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
+            //}
         }
     }
 }

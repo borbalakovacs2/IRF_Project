@@ -8,3 +8,4 @@ C:\Users\kovac\source\repos\IRF_Project\Bevasarlo\Bevasarlo\obj\Debug\Bevasarlo.
 C:\Users\kovac\source\repos\IRF_Project\Bevasarlo\Bevasarlo\obj\Debug\Bevasarlo.csproj.CoreCompileInputs.cache
 C:\Users\kovac\source\repos\IRF_Project\Bevasarlo\Bevasarlo\obj\Debug\Bevasarlo.exe
 C:\Users\kovac\source\repos\IRF_Project\Bevasarlo\Bevasarlo\obj\Debug\Bevasarlo.pdb
+C:\Users\kovac\source\repos\IRF_Project\Bevasarlo\Bevasarlo\obj\Debug\Bevasarlo.csproj.ResolveComReference.cache
