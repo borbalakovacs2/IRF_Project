@@ -39,18 +39,17 @@
             this.tbEgyeb = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.listBoxTermekek = new System.Windows.Forms.CheckedListBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnTorles = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbGlutenSelect = new System.Windows.Forms.CheckBox();
+            this.cbVeganSelect = new System.Windows.Forms.CheckBox();
+            this.cbMind = new System.Windows.Forms.CheckBox();
+            this.cbTipus = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cbTermek = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnMentes = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -152,15 +151,15 @@
             this.listBoxTermekek.Size = new System.Drawing.Size(339, 412);
             this.listBoxTermekek.TabIndex = 12;
             // 
-            // button2
+            // btnTorles
             // 
-            this.button2.Location = new System.Drawing.Point(738, 137);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(96, 30);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Törlés";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnTorles.Location = new System.Drawing.Point(738, 172);
+            this.btnTorles.Name = "btnTorles";
+            this.btnTorles.Size = new System.Drawing.Size(96, 30);
+            this.btnTorles.TabIndex = 13;
+            this.btnTorles.Text = "Törlés";
+            this.btnTorles.UseVisualStyleBackColor = true;
+            this.btnTorles.Click += new System.EventHandler(this.btnTorles_Click);
             // 
             // label4
             // 
@@ -171,47 +170,47 @@
             this.label4.TabIndex = 14;
             this.label4.Text = "Kiválaszt:";
             // 
-            // checkBox1
+            // cbGlutenSelect
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(738, 106);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(118, 21);
-            this.checkBox1.TabIndex = 16;
-            this.checkBox1.Text = "Gluténmentes";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.cbGlutenSelect.AutoSize = true;
+            this.cbGlutenSelect.Location = new System.Drawing.Point(738, 106);
+            this.cbGlutenSelect.Name = "cbGlutenSelect";
+            this.cbGlutenSelect.Size = new System.Drawing.Size(118, 21);
+            this.cbGlutenSelect.TabIndex = 16;
+            this.cbGlutenSelect.Text = "Gluténmentes";
+            this.cbGlutenSelect.UseVisualStyleBackColor = true;
+            this.cbGlutenSelect.CheckedChanged += new System.EventHandler(this.cbGlutenSelect_CheckedChanged);
             // 
-            // checkBox2
+            // cbVeganSelect
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(738, 79);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(71, 21);
-            this.checkBox2.TabIndex = 15;
-            this.checkBox2.Text = "Vegán";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.cbVeganSelect.AutoSize = true;
+            this.cbVeganSelect.Location = new System.Drawing.Point(738, 79);
+            this.cbVeganSelect.Name = "cbVeganSelect";
+            this.cbVeganSelect.Size = new System.Drawing.Size(71, 21);
+            this.cbVeganSelect.TabIndex = 15;
+            this.cbVeganSelect.Text = "Vegán";
+            this.cbVeganSelect.UseVisualStyleBackColor = true;
+            this.cbVeganSelect.CheckedChanged += new System.EventHandler(this.cbVeganSelect_CheckedChanged);
             // 
-            // checkBox6
+            // cbMind
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(738, 52);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(60, 21);
-            this.checkBox6.TabIndex = 20;
-            this.checkBox6.Text = "Mind";
-            this.checkBox6.UseVisualStyleBackColor = true;
-            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
+            this.cbMind.AutoSize = true;
+            this.cbMind.Location = new System.Drawing.Point(738, 52);
+            this.cbMind.Name = "cbMind";
+            this.cbMind.Size = new System.Drawing.Size(60, 21);
+            this.cbMind.TabIndex = 20;
+            this.cbMind.Text = "Mind";
+            this.cbMind.UseVisualStyleBackColor = true;
+            this.cbMind.CheckedChanged += new System.EventHandler(this.cbMind_CheckedChanged);
             // 
-            // comboBox1
+            // cbTipus
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 41);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(190, 24);
-            this.comboBox1.TabIndex = 21;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cbTipus.FormattingEnabled = true;
+            this.cbTipus.Location = new System.Drawing.Point(12, 41);
+            this.cbTipus.Name = "cbTipus";
+            this.cbTipus.Size = new System.Drawing.Size(190, 24);
+            this.cbTipus.TabIndex = 21;
+            this.cbTipus.SelectedIndexChanged += new System.EventHandler(this.cbTipus_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -250,41 +249,32 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button4
+            // btnMentes
             // 
-            this.button4.Location = new System.Drawing.Point(738, 199);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(96, 30);
-            this.button4.TabIndex = 26;
-            this.button4.Text = "Exportálás";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(738, 257);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(96, 30);
-            this.button5.TabIndex = 27;
-            this.button5.Text = "Mentés";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnMentes.Location = new System.Drawing.Point(738, 226);
+            this.btnMentes.Name = "btnMentes";
+            this.btnMentes.Size = new System.Drawing.Size(96, 30);
+            this.btnMentes.TabIndex = 27;
+            this.btnMentes.Text = "Mentés";
+            this.btnMentes.UseVisualStyleBackColor = true;
+            this.btnMentes.Click += new System.EventHandler(this.btnMentes_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(905, 450);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.btnMentes);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cbTermek);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.checkBox6);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.cbTipus);
+            this.Controls.Add(this.cbMind);
+            this.Controls.Add(this.cbGlutenSelect);
+            this.Controls.Add(this.cbVeganSelect);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnTorles);
             this.Controls.Add(this.listBoxTermekek);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
@@ -315,18 +305,17 @@
         private System.Windows.Forms.TextBox tbEgyeb;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckedListBox listBoxTermekek;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnTorles;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.CheckBox cbGlutenSelect;
+        private System.Windows.Forms.CheckBox cbVeganSelect;
+        private System.Windows.Forms.CheckBox cbMind;
+        private System.Windows.Forms.ComboBox cbTipus;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbTermek;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnMentes;
     }
 }
 

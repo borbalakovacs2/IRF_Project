@@ -11,7 +11,7 @@ namespace Bevasarlo.Entities
         public ZoldsegGyumolcs(string nev)
         {
             this.Nev = nev;
-            if (nev == "Kígyóuborka" || nev == "Citrom" || nev == "Saláta" || nev == "Hagyma")
+            if (nev == "Kígyóuborka" || nev == "Citrom" || nev == "Saláta" || nev == "Hagyma" || nev == "Paradicsom")
             {
                 this.Mertekegyseg = "db";
             }

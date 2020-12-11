@@ -15,7 +15,7 @@ namespace Bevasarlo
     public partial class Form1 : Form
     {
         Termek termek = new Termek();
-
+        List<string> recept = new List<string>();
 
         public Form1()
         {
@@ -26,7 +26,7 @@ namespace Bevasarlo
                                   "Csomagolt élelmiszer",
                                   "Tisztítószer, háztartási kellék"};
 
-            comboBox1.DataSource = tipusok;
+            cbTipus.DataSource = tipusok;
 
         }
 
@@ -56,12 +56,12 @@ namespace Bevasarlo
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbTipus_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbGluten.Checked = false;
             cbVegan.Checked = false;
             tbEgyeb.Text = "";
-            switch (comboBox1.SelectedIndex)
+            switch (cbTipus.SelectedIndex)
             {
                 case (int)Tipusok.Pektermek:
                     cbTermek.DataSource = Termek.pektermekek;
@@ -84,7 +84,7 @@ namespace Bevasarlo
         private void cbTermek_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Termek termek = new Termek();
-            switch (comboBox1.SelectedIndex)
+            switch (cbTipus.SelectedIndex)
             {
                 case (int)Tipusok.Pektermek:
                     Pektermek pektermek = new Pektermek(cbTermek.Text);
@@ -124,9 +124,9 @@ namespace Bevasarlo
             tbMennyi.Text = termek.Mennyiseg.ToString();
         }
 
-        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        private void cbMind_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox6.Checked == true)
+            if (cbMind.Checked == true)
             {
                 for (int i = 0; i < listBoxTermekek.Items.Count; i++)
                 {
@@ -142,9 +142,9 @@ namespace Bevasarlo
             }
         }
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        private void cbVeganSelect_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox2.Checked == true)
+            if (cbVeganSelect.Checked == true)
             {
                 checkItems("vegán");
 
@@ -176,9 +176,9 @@ namespace Bevasarlo
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void cbGlutenSelect_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked == true)
+            if (cbGlutenSelect.Checked == true)
             {
                 checkItems("gluténmentes");
 
@@ -190,7 +190,7 @@ namespace Bevasarlo
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnTorles_Click(object sender, EventArgs e)
         {
             for (int i = listBoxTermekek.Items.Count - 1; i >= 0; i--)
             {
@@ -199,6 +199,7 @@ namespace Bevasarlo
                     listBoxTermekek.Items.Remove(listBoxTermekek.Items[i]);
                 }
             }
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -206,23 +207,95 @@ namespace Bevasarlo
             var documentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.InitialDirectory = documentPath;
-            ofd.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            ofd.Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*";
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 var filePath = ofd.FileName;
                 var fileStream = ofd.OpenFile();
-
                 using (StreamReader reader = new StreamReader(fileStream))
                 {
-                    List<string> receptSor = new List<string>();
+                    int index = 0;
                     while (!reader.EndOfStream)
                     {
-                        var line = reader.ReadLine();
-                        line = line.Remove(line.Length - 1);
 
-                        listBoxTermekek.Items.Add(line);
+                        try
+                        {
+                            var line = reader.ReadLine();
+                            if (index != 0)
+                            {
+                                string[] values = line.Split(',');
+                                termek.Nev = values[0];
+                                termek.Mennyiseg = int.Parse(values[1]);
+                                termek.Mertekegyseg = values[2];
+                                if (values[3] == "igen")
+                                {
+                                    termek.Vegan = true;
+                                }
+                                else
+                                {
+                                    termek.Vegan = false;
+                                }
+                                if (values[4] == "igen")
+                                {
+                                    termek.Glutenmentes = true;
+                                }
+                                else
+                                {
+                                    termek.Glutenmentes = false;
+                                }
+                                if (values[5] != null)
+                                {
+                                    termek.Egyeb = values[5];
+                                }
+                                else
+                                {
+                                    termek.Egyeb = "";
+                                }
+                                Termek.termekek.Add(termek);
+                                listBoxTermekek.Items.Add(termek.ListahozAd());
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString());
+                        }
+                        index++;
                     }
+                }
+
+            }
+            
+        }
+
+        private void btnMentes_Click(object sender, EventArgs e)
+        {
+            if (listBoxTermekek.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("Válaszd ki a termékeket!");
+                return;
+            }
+            List<string> lista = new List<string>();
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            sfd.Filter = "Comma Separated Values (*.csv)|*.csv";
+            sfd.FileName = "bevasarlolista.csv";
+            sfd.DefaultExt = "csv";
+            sfd.AddExtension = true;
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    foreach (var item in listBoxTermekek.CheckedItems)
+                    {
+                        lista.Add(item.ToString());
+                    }
+                    File.WriteAllLines(sfd.FileName, lista, Encoding.UTF8);
+                    MessageBox.Show("Sikeres mentés");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Hiba :" + ex.Message);
                 }
             }
         }
