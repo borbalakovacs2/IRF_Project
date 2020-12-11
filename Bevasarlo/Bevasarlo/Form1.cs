@@ -260,7 +260,9 @@ namespace Bevasarlo
                                 }
 
                                 termek.ListahozAd();
-                                listBoxTermekek.Items.Add(termek);
+                                listBoxTermekek.DataSource = null;
+                                listBoxTermekek.DataSource = Termek.termekek;
+                                listBoxTermekek.DisplayMember = "DisplayMember";
                             }
                         }
                         catch (Exception ex)
