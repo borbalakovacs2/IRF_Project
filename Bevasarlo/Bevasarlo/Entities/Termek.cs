@@ -14,7 +14,7 @@ namespace Bevasarlo
         public static string[] tejtermekek = { "Tej", "Sajt", "Joghurt", "Tejföl", "Vaj" };
         public static string[] pektermekek = { "Kenyér", "Zsemle", "Kifli", "Pogácsa", "Kakaós csiga" };
         public static string[] csomagolt = { "Sonka", "Tojás", "Sör", "Nógrádi ropi", "Fagyasztott zöldség", "Csokoládé" };
-        public static string[] haztartasi = { "Mosópor", "Öblítő", "WC papír", "Tisztítószer", "Papírzsebkendő"};
+        public static string[] haztartasi = { "Mosópor", "Öblítő", "WC papír", "Tisztítószer", "Papírzsebkendő" };
         public static List<Termek> termekek = new List<Termek>();
 
         public int ID { get; set; }
@@ -29,7 +29,6 @@ namespace Bevasarlo
 
         public Termek()
         {
-            this.Mennyiseg = 1;
             this.MennyisegEmelo = this.Mennyiseg;
         }
         public void Hozzad()
@@ -42,21 +41,30 @@ namespace Bevasarlo
         }
         public void ListahozAd()
         {
+            string mennyiseg;
+            if (this.Mennyiseg == 0)
+            {
+                mennyiseg = "";
+            }
+            else
+            {
+                mennyiseg = ", " + this.Mennyiseg.ToString() + " ";
+            }
 
             this.ID = termekek.Count;
-            string elem = this.Nev + ' ' + this.Mennyiseg + ' ' + this.Mertekegyseg;
-                if (this.Vegan == true)
-                {
-                    elem = elem + ", vegán";
-                }
-                if (this.Glutenmentes == true)
-                {
-                    elem = elem + ", gluténmentes";
-                }
-                if (this.Egyeb != null && this.Egyeb != "")
-                {
-                    elem = elem + ", " + this.Egyeb;
-                }
+            string elem = this.Nev + mennyiseg + this.Mertekegyseg;
+            if (this.Vegan == true)
+            {
+                elem = elem + ", vegán";
+            }
+            if (this.Glutenmentes == true)
+            {
+                elem = elem + ", gluténmentes";
+            }
+            if (this.Egyeb != null && this.Egyeb != "")
+            {
+                elem = elem + ", " + this.Egyeb;
+            }
             this.DisplayMember = elem;
             termekek.Add(this);
 

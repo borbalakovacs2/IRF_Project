@@ -10,6 +10,8 @@ namespace Bevasarlo.Entities
     {
         public Pektermek(string nev)
         {
+
+            this.Mennyiseg = 1;
             this.Nev = nev;
             if (nev == "Kenyér")
             {

@@ -370,7 +370,10 @@ namespace Bevasarlo
                                 {
                                     string[] values = line.Split(',');
                                     newTermek.Nev = values[0];
-                                    newTermek.Mennyiseg = int.Parse(values[1]);
+                                    if (values[1] != "")
+                                    {
+                                        newTermek.Mennyiseg = int.Parse(values[1]);
+                                    }
                                     newTermek.Mertekegyseg = values[2];
                                     if (values[3] == "igen" || values[3] == "Igen")
                                     {

@@ -14,6 +14,7 @@ namespace Bevasarlo.Entities
             if (nev == "Tej")
             {
                 this.Mertekegyseg = "l";
+                this.Mennyiseg = 1;
             }
             else
             {
