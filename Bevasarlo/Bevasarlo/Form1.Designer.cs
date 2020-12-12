@@ -47,7 +47,7 @@
             this.cbTipus = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cbTermek = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.labelMennyiseg = new System.Windows.Forms.Label();
             this.btnRecept = new System.Windows.Forms.Button();
             this.btnMentes = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -211,6 +211,7 @@
             this.cbTipus.Size = new System.Drawing.Size(190, 24);
             this.cbTipus.TabIndex = 21;
             this.cbTipus.SelectedIndexChanged += new System.EventHandler(this.cbTipus_SelectedIndexChanged);
+            this.cbTipus.TextUpdate += new System.EventHandler(this.cbTipus_TextUpdate);
             // 
             // label5
             // 
@@ -229,15 +230,16 @@
             this.cbTermek.Size = new System.Drawing.Size(190, 24);
             this.cbTermek.TabIndex = 23;
             this.cbTermek.SelectedIndexChanged += new System.EventHandler(this.cbTermek_SelectedIndexChanged);
+            this.cbTermek.TextUpdate += new System.EventHandler(this.cbTermek_TextUpdate);
             // 
-            // label6
+            // labelMennyiseg
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(61, 162);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(23, 17);
-            this.label6.TabIndex = 24;
-            this.label6.Text = "kg";
+            this.labelMennyiseg.AutoSize = true;
+            this.labelMennyiseg.Location = new System.Drawing.Point(61, 162);
+            this.labelMennyiseg.Name = "labelMennyiseg";
+            this.labelMennyiseg.Size = new System.Drawing.Size(23, 17);
+            this.labelMennyiseg.TabIndex = 24;
+            this.labelMennyiseg.Text = "kg";
             // 
             // btnRecept
             // 
@@ -266,7 +268,7 @@
             this.ClientSize = new System.Drawing.Size(905, 450);
             this.Controls.Add(this.btnMentes);
             this.Controls.Add(this.btnRecept);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.labelMennyiseg);
             this.Controls.Add(this.cbTermek);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cbTipus);
@@ -313,7 +315,7 @@
         private System.Windows.Forms.ComboBox cbTipus;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbTermek;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelMennyiseg;
         private System.Windows.Forms.Button btnRecept;
         private System.Windows.Forms.Button btnMentes;
     }

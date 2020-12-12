@@ -50,6 +50,18 @@ namespace Bevasarlo
         {
             Termek newTermek = new Termek();
             termek = newTermek;
+            termek.Nev = cbTermek.Text;
+            bool egyedi = IsDigitsOnly(tbMennyi.Text);
+            if (egyedi == true) {
+                termek.Mennyiseg = int.Parse(tbMennyi.Text);
+            }
+            else
+            {
+                var mennyi = tbMennyi.Text.Split(' ');
+                termek.Mennyiseg = int.Parse(mennyi[0]);
+                termek.Mertekegyseg = mennyi[1];
+                Console.WriteLine(mennyi.ToString(), tbMennyi.Text);
+            }
             cbTermek_SelectedIndexChanged(sender, e);  //need to trigger so the new object is set
             if (cbVegan.Checked == true)
             {
@@ -98,6 +110,9 @@ namespace Bevasarlo
                     cbTermek.DataSource = Termek.haztartasi;
                     break;
             }
+            labelMennyiseg.Visible = true;
+            btnPlus.Enabled = true;
+            btnMinus.Enabled = true;
         }
 
         private void cbTermek_SelectedIndexChanged(object sender, EventArgs e)
@@ -127,7 +142,7 @@ namespace Bevasarlo
             }
 
             tbMennyi.Text = termek.Mennyiseg.ToString();
-            label6.Text = termek.Mertekegyseg;
+            labelMennyiseg.Text = termek.Mertekegyseg;
         }
 
         private void btnPlus_Click(object sender, EventArgs e)
@@ -428,6 +443,30 @@ namespace Bevasarlo
             listBoxTermekek.DataSource = Termek.termekek;
             listBoxTermekek.DisplayMember = "DisplayMember";
             listBoxTermekek.ValueMember = "ID";
+        }
+
+        private void cbTipus_TextUpdate(object sender, EventArgs e)
+        {
+            cbTermek.DataSource = null;
+            cbTermek_TextUpdate(sender, e);
+            
+        }
+        private bool IsDigitsOnly(string str)
+        {
+            foreach (char c in str)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+
+            return true;
+        }
+
+        private void cbTermek_TextUpdate(object sender, EventArgs e)
+        {
+            labelMennyiseg.Visible = false;
+            btnPlus.Enabled = false;
+            btnMinus.Enabled = false;
         }
     }
 }
