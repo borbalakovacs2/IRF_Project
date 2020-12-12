@@ -38,6 +38,9 @@ namespace Bevasarlo
 
         private void btnListahoz_Click(object sender, EventArgs e)
         {
+            Termek newTermek = new Termek();
+             termek = newTermek; 
+            cbTermek_SelectedIndexChanged(sender, e);  //need to trigger so the new object is set
             if (cbVegan.Checked == true)
             {
                 termek.Vegan = true;
@@ -56,9 +59,7 @@ namespace Bevasarlo
             }
             termek.Egyeb = tbEgyeb.Text;
 
-            Termek newTermek = new Termek();
-            termek = newTermek; 
-            cbTermek_SelectedIndexChanged(sender, e);  //need to trigger so the new object is set
+
             termek.ListahozAd();
             RefreshData();
 
