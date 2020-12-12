@@ -58,13 +58,9 @@ namespace Bevasarlo
 
             Termek newTermek = new Termek();
             termek = newTermek; 
-            cbTipus_SelectedIndexChanged(sender, e); //need to trigger so the new object is set
-            cbTermek_SelectedIndexChanged(sender, e);
+            cbTermek_SelectedIndexChanged(sender, e);  //need to trigger so the new object is set
             termek.ListahozAd();
-            listBoxTermekek.DataSource = null;
-            listBoxTermekek.DataSource = Termek.termekek;
-            listBoxTermekek.DisplayMember = "DisplayMember";
-            listBoxTermekek.ValueMember = "ID";
+            RefreshData();
 
         }
 
@@ -202,22 +198,19 @@ namespace Bevasarlo
 
         private void btnTorles_Click(object sender, EventArgs e)
         {
-            Termek termek = new Termek();
+            //Termek termek = new Termek();
             List<Termek> toRemove = new List<Termek>();
             int[] currentSelectedValue = new int[this.listBoxTermekek.CheckedItems.Count];
             for (int i = 0; i < listBoxTermekek.CheckedItems.Count; i++)
             {
                 termek = (Termek)listBoxTermekek.CheckedItems[i];
-                Console.WriteLine(termek.ID.ToString());
+                Termek.termekek.RemoveAt(termek.ID);
+                for (int j = 0; j < Termek.termekek.Count; j++)
+                {
+                    Termek.termekek[j].ID = j;
+                }
             }
-            //for (int i = listBoxTermekek.Items.Count - 1; i >= 0; i--)
-            //{
-            //    if (listBoxTermekek.GetItemChecked(i))
-            //    {
-            //        listBoxTermekek.Items.Remove(listBoxTermekek.Items[i]);
-            //    }
-            //}
-
+            RefreshData();
         }
 
 
@@ -384,10 +377,7 @@ namespace Bevasarlo
                                     }
 
                                     termek.ListahozAd();
-                                    listBoxTermekek.DataSource = null;
-                                    listBoxTermekek.DataSource = Termek.termekek;
-                                    listBoxTermekek.DisplayMember = "DisplayMember";
-                                    listBoxTermekek.ValueMember = "ID";
+                                    RefreshData();
                                 }
                             }
                             catch (Exception ex)
@@ -401,6 +391,14 @@ namespace Bevasarlo
                 }
 
             }
+        }
+
+        private void RefreshData()
+        {
+            listBoxTermekek.DataSource = null;
+            listBoxTermekek.DataSource = Termek.termekek;
+            listBoxTermekek.DisplayMember = "DisplayMember";
+            listBoxTermekek.ValueMember = "ID";
         }
     }
 }

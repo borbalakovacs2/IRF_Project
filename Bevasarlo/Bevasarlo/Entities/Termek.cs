@@ -43,7 +43,7 @@ namespace Bevasarlo
         public void ListahozAd()
         {
 
-            this.ID = termekek.Count + 1;
+            this.ID = termekek.Count;
             string elem = this.Nev + ' ' + this.Mennyiseg + ' ' + this.Mertekegyseg;
                 if (this.Vegan == true)
                 {
