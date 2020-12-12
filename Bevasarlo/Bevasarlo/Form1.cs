@@ -227,16 +227,16 @@ namespace Bevasarlo
 
         private void btnMentes_Click(object sender, EventArgs e)
         {
-            if (listBoxTermekek.CheckedItems.Count == 0)
+            if (Termek.termekek.Count == 0)
             {
-                MessageBox.Show("Válaszd ki a termékeket!");
-                return;
+                MessageBox.Show("Adj hozzá termékeket!");
             }
-
-
-            CreateExcel();
-            CreateTable();
-            FormatTable();
+            else
+            {
+                CreateExcel();
+                CreateTable();
+                FormatTable();
+            }
 
         }
         private void CreateExcel()
