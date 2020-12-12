@@ -164,32 +164,25 @@ namespace Bevasarlo
         {
             if (cbVeganSelect.Checked == true)
             {
-                checkItems("vegán");
+                foreach (var item in Termek.termekek)
+                {
+                    if (item.Vegan == true)
+                    {
+                        listBoxTermekek.SetItemChecked(item.ID, true);
+                    }
+                }
 
             }
 
             else
             {
-                uncheck();
-            }
-        }
-        private void checkItems(string toCheck)
-        {
-            for (int i = 0; i < listBoxTermekek.Items.Count; i++)
-            {
-                string value = listBoxTermekek.Items[i].ToString();
-                if (value.Contains(toCheck))
+                foreach (var item in Termek.termekek)
                 {
-                    listBoxTermekek.SetItemChecked(i, true);
+                    if (item.Vegan == true)
+                    {
+                        listBoxTermekek.SetItemChecked(item.ID, false);
+                    }
                 }
-            }
-        }
-        private void uncheck()
-        {
-
-            for (int i = 0; i < listBoxTermekek.Items.Count; i++)
-            {
-                listBoxTermekek.SetItemChecked(i, false);
             }
         }
 
@@ -197,19 +190,30 @@ namespace Bevasarlo
         {
             if (cbGlutenSelect.Checked == true)
             {
-                checkItems("gluténmentes");
+                foreach (var item in Termek.termekek)
+                {
+                    if (item.Glutenmentes == true)
+                    {
+                        listBoxTermekek.SetItemChecked(item.ID, true);
+                    }
+                }
 
             }
 
             else
             {
-                uncheck();
+                foreach (var item in Termek.termekek)
+                {
+                    if (item.Glutenmentes == true)
+                    {
+                        listBoxTermekek.SetItemChecked(item.ID, false);
+                    }
+                }
             }
         }
 
         private void btnTorles_Click(object sender, EventArgs e)
         {
-            //Termek termek = new Termek();
             List<Termek> toRemove = new List<Termek>();
             int[] currentSelectedValue = new int[this.listBoxTermekek.CheckedItems.Count];
             for (int i = 0; i < listBoxTermekek.CheckedItems.Count; i++)
