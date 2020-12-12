@@ -37,7 +37,7 @@
             this.cbGluten = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tbEgyeb = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnListahoz = new System.Windows.Forms.Button();
             this.listBoxTermekek = new System.Windows.Forms.CheckedListBox();
             this.btnTorles = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -48,7 +48,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cbTermek = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnRecept = new System.Windows.Forms.Button();
             this.btnMentes = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -133,15 +133,15 @@
             this.tbEgyeb.Size = new System.Drawing.Size(266, 22);
             this.tbEgyeb.TabIndex = 9;
             // 
-            // button1
+            // btnListahoz
             // 
-            this.button1.Location = new System.Drawing.Point(12, 376);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(114, 42);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Listához ad";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnListahoz.Location = new System.Drawing.Point(12, 376);
+            this.btnListahoz.Name = "btnListahoz";
+            this.btnListahoz.Size = new System.Drawing.Size(114, 42);
+            this.btnListahoz.TabIndex = 11;
+            this.btnListahoz.Text = "Listához ad";
+            this.btnListahoz.UseVisualStyleBackColor = true;
+            this.btnListahoz.Click += new System.EventHandler(this.btnListahoz_Click);
             // 
             // listBoxTermekek
             // 
@@ -239,15 +239,15 @@
             this.label6.TabIndex = 24;
             this.label6.Text = "kg";
             // 
-            // button3
+            // btnRecept
             // 
-            this.button3.Location = new System.Drawing.Point(143, 376);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(135, 42);
-            this.button3.TabIndex = 25;
-            this.button3.Text = "Recept betöltés";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnRecept.Location = new System.Drawing.Point(143, 376);
+            this.btnRecept.Name = "btnRecept";
+            this.btnRecept.Size = new System.Drawing.Size(135, 42);
+            this.btnRecept.TabIndex = 25;
+            this.btnRecept.Text = "Recept betöltés";
+            this.btnRecept.UseVisualStyleBackColor = true;
+            this.btnRecept.Click += new System.EventHandler(this.btnRecept_Click);
             // 
             // btnMentes
             // 
@@ -265,7 +265,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(905, 450);
             this.Controls.Add(this.btnMentes);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnRecept);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cbTermek);
             this.Controls.Add(this.label5);
@@ -276,7 +276,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnTorles);
             this.Controls.Add(this.listBoxTermekek);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnListahoz);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbEgyeb);
             this.Controls.Add(this.cbGluten);
@@ -303,7 +303,7 @@
         private System.Windows.Forms.CheckBox cbGluten;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbEgyeb;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnListahoz;
         private System.Windows.Forms.CheckedListBox listBoxTermekek;
         private System.Windows.Forms.Button btnTorles;
         private System.Windows.Forms.Label label4;
@@ -314,7 +314,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbTermek;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnRecept;
         private System.Windows.Forms.Button btnMentes;
     }
 }

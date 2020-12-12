@@ -36,7 +36,7 @@ namespace Bevasarlo
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnListahoz_Click(object sender, EventArgs e)
         {
             if (cbVegan.Checked == true)
             {
@@ -56,10 +56,15 @@ namespace Bevasarlo
             }
             termek.Egyeb = tbEgyeb.Text;
 
+            Termek newTermek = new Termek();
+            termek = newTermek; 
+            cbTipus_SelectedIndexChanged(sender, e); //need to trigger so the new object is set
+            cbTermek_SelectedIndexChanged(sender, e);
             termek.ListahozAd();
             listBoxTermekek.DataSource = null;
             listBoxTermekek.DataSource = Termek.termekek;
             listBoxTermekek.DisplayMember = "DisplayMember";
+            listBoxTermekek.ValueMember = "ID";
 
         }
 
@@ -163,7 +168,6 @@ namespace Bevasarlo
         }
         private void checkItems(string toCheck)
         {
-
             for (int i = 0; i < listBoxTermekek.Items.Count; i++)
             {
                 string value = listBoxTermekek.Items[i].ToString();
@@ -198,84 +202,24 @@ namespace Bevasarlo
 
         private void btnTorles_Click(object sender, EventArgs e)
         {
-            for (int i = listBoxTermekek.Items.Count - 1; i >= 0; i--)
+            Termek termek = new Termek();
+            List<Termek> toRemove = new List<Termek>();
+            int[] currentSelectedValue = new int[this.listBoxTermekek.CheckedItems.Count];
+            for (int i = 0; i < listBoxTermekek.CheckedItems.Count; i++)
             {
-                if (listBoxTermekek.GetItemChecked(i))
-                {
-                    listBoxTermekek.Items.Remove(listBoxTermekek.Items[i]);
-                }
+                termek = (Termek)listBoxTermekek.CheckedItems[i];
+                Console.WriteLine(termek.ID.ToString());
             }
+            //for (int i = listBoxTermekek.Items.Count - 1; i >= 0; i--)
+            //{
+            //    if (listBoxTermekek.GetItemChecked(i))
+            //    {
+            //        listBoxTermekek.Items.Remove(listBoxTermekek.Items[i]);
+            //    }
+            //}
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            var documentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.InitialDirectory = documentPath;
-            ofd.Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*";
-
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                var filePath = ofd.FileName;
-                var fileStream = ofd.OpenFile();
-                using (StreamReader reader = new StreamReader(fileStream))
-                {
-                    int index = 0;
-                    while (!reader.EndOfStream)
-                    {
-
-                        try
-                        {
-                            var line = reader.ReadLine();
-                            if (index != 0)
-                            {
-                                string[] values = line.Split(',');
-                                termek.Nev = values[0];
-                                termek.Mennyiseg = int.Parse(values[1]);
-                                termek.Mertekegyseg = values[2];
-                                if (values[3] == "igen")
-                                {
-                                    termek.Vegan = true;
-                                }
-                                else
-                                {
-                                    termek.Vegan = false;
-                                }
-                                if (values[4] == "igen")
-                                {
-                                    termek.Glutenmentes = true;
-                                }
-                                else
-                                {
-                                    termek.Glutenmentes = false;
-                                }
-                                if (values[5] != null)
-                                {
-                                    termek.Egyeb = values[5];
-                                }
-                                else
-                                {
-                                    termek.Egyeb = "";
-                                }
-
-                                termek.ListahozAd();
-                                listBoxTermekek.DataSource = null;
-                                listBoxTermekek.DataSource = Termek.termekek;
-                                listBoxTermekek.DisplayMember = "DisplayMember";
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.ToString());
-                        }
-                        index++;
-                    }
-                }
-
-            }
-
-        }
 
         private void btnMentes_Click(object sender, EventArgs e)
         {
@@ -285,7 +229,7 @@ namespace Bevasarlo
                 return;
             }
 
-            //CreateExcel();
+            CreateExcel();
 
             //List<string> lista = new List<string>();
             //SaveFileDialog sfd = new SaveFileDialog();
@@ -307,73 +251,156 @@ namespace Bevasarlo
             //    }
             //    catch (Exception ex)
             //    {
-            //        MessageBox.Show("Hiba :" + ex.Message);
+            //        MessageBox.Show("Error: " + ex.Message);
             //    }
             //}
-            //}
-            //private void CreateExcel()
-            //{
-            //    try
-            //    {
-            //        xlApp = new Excel.Application();
-            //        xlWB = xlApp.Workbooks.Add(Missing.Value);
-            //        xlSheet = xlWB.ActiveSheet;
-            //        CreateTable();
-            //        xlApp.Visible = true;
-            //        xlApp.UserControl = true;
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        string errMsg = string.Format("Error: {0}\nLine: {1}", ex.Message, ex.Source);
-            //        MessageBox.Show(errMsg, "Error");
+        }
+        private void CreateExcel()
+        {
+            try
+            {
+                xlApp = new Excel.Application();
+                xlWB = xlApp.Workbooks.Add(Missing.Value);
+                xlSheet = xlWB.ActiveSheet;
+                CreateTable();
+                xlApp.Visible = true;
+                xlApp.UserControl = true;
+            }
+            catch (Exception ex)
+            {
+                string errMsg = string.Format("Error: {0}\nLine: {1}", ex.Message, ex.Source);
+                MessageBox.Show(errMsg, "Error");
 
-            //        xlWB.Close(false, Type.Missing, Type.Missing);
-            //        xlApp.Quit();
-            //        xlWB = null;
-            //        xlApp = null;
-            //    }
-            //}
-            //private void CreateTable()
-            //{
-            //    string[] header = new string[] {
-            //        "Termék neve",
-            //        "Mennyiség",
-            //        "Mértékegység",
-            //        "Vegán",
-            //        "Gluténmentes"
-            //    };
+                xlWB.Close(false, Type.Missing, Type.Missing);
+                xlApp.Quit();
+                xlWB = null;
+                xlApp = null;
+            }
+        }
+        private void CreateTable()
+        {
+            string[] header = new string[] {
+                    "Termék neve",
+                    "Mennyiség",
+                    "Mértékegység",
+                    "Vegán",
+                    "Gluténmentes"
+                };
 
-            //    for(int i = 0; i < header.Length; i++)
-            //    {
-            //        xlSheet.Cells[1, i + 1] = header[i];
-            //    }
+            for (int i = 0; i < header.Length; i++)
+            {
+                xlSheet.Cells[1, i + 1] = header[i];
+            }
 
-            //    object[,] values = new object[Termek.termekek.Count, header.Length];
-            //    int counter = 0;
-            //    foreach (var f in Flats)
-            //    {
-            //        values[counter, 0] = f.Code;
-            //        values[counter, 1] = f.Vendor;
-            //        values[counter, 2] = f.Side;
-            //        values[counter, 3] = f.District;
-            //        if (f.Elevator == true)
-            //        {
-            //            values[counter, 4] = "Van";
-            //        }
-            //        else
-            //        {
-            //            values[counter, 4] = "Nincs";
-            //        }
-            //        values[counter, 5] = f.NumberOfRooms;
-            //        values[counter, 6] = f.FloorArea;
-            //        values[counter, 7] = f.Price;
-            //        values[counter, 8] = "=" + GetCell(counter + 2, 7) + "*" + GetCell(counter + 2, 8);
-            //        counter++;
-            //    }
-            //    xlSheet.get_Range(
-            //        GetCell(2, 1),
-            //        GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
-            //}
+            object[,] values = new object[listBoxTermekek.CheckedItems.Count, header.Length];
+            int counter = 0;
+            foreach (var item in Termek.termekek)
+            {
+                values[counter, 0] = item.Nev;
+                values[counter, 1] = item.Mennyiseg.ToString();
+                values[counter, 2] = item.Mertekegyseg;
+                values[counter, 3] = item.Vegan;
+                values[counter, 4] = item.Glutenmentes;
+                values[counter, 5] = item.Egyeb;
+                counter++;
+            }
+            xlSheet.get_Range(
+                GetCell(2, 1),
+                GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
+        }
+
+        private string GetCell(int x, int y)
+        {
+            string ExcelCoordinate = "";
+            int dividend = y;
+            int modulo;
+
+            while (dividend > 0)
+            {
+                modulo = (dividend - 1) % 26;
+                ExcelCoordinate = Convert.ToChar(65 + modulo).ToString() + ExcelCoordinate;
+                dividend = (int)((dividend - modulo) / 26);
+            }
+            ExcelCoordinate += x.ToString();
+
+            return ExcelCoordinate;
+
+
+        }
+
+
+
+        private void btnRecept_Click(object sender, EventArgs e)
+        {
+
+            {
+                var documentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.InitialDirectory = documentPath;
+                ofd.Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    var filePath = ofd.FileName;
+                    var fileStream = ofd.OpenFile();
+                    using (StreamReader reader = new StreamReader(fileStream))
+                    {
+                        int index = 0;
+                        while (!reader.EndOfStream)
+                        {
+
+                            try
+                            {
+                                var line = reader.ReadLine();
+                                if (index != 0)
+                                {
+                                    string[] values = line.Split(',');
+                                    termek.Nev = values[0];
+                                    termek.Mennyiseg = int.Parse(values[1]);
+                                    termek.Mertekegyseg = values[2];
+                                    if (values[3] == "igen" || values[3] == "Igen")
+                                    {
+                                        termek.Vegan = true;
+                                    }
+                                    else
+                                    {
+                                        termek.Vegan = false;
+                                    }
+                                    if (values[4] == "igen" || values[4] == "Igen")
+                                    {
+                                        termek.Glutenmentes = true;
+                                    }
+                                    else
+                                    {
+                                        termek.Glutenmentes = false;
+                                    }
+                                    if (values[5] != null)
+                                    {
+                                        termek.Egyeb = values[5];
+                                    }
+                                    else
+                                    {
+                                        termek.Egyeb = "";
+                                    }
+
+                                    termek.ListahozAd();
+                                    listBoxTermekek.DataSource = null;
+                                    listBoxTermekek.DataSource = Termek.termekek;
+                                    listBoxTermekek.DisplayMember = "DisplayMember";
+                                    listBoxTermekek.ValueMember = "ID";
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.ToString());
+                            }
+                            index++;
+                        }
+                    }
+
+                }
+
+            }
         }
     }
 }

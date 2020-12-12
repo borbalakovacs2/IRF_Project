@@ -17,6 +17,7 @@ namespace Bevasarlo
         public static string[] haztartasi = { "Mosópor", "Öblítő", "WC papír", "Tisztítószer", "Papírzsebkendő"};
         public static List<Termek> termekek = new List<Termek>();
 
+        public int ID { get; set; }
         public string Nev { get; set; }
         public int Mennyiseg { get; set; }
         public string Mertekegyseg { get; set; }
@@ -31,7 +32,6 @@ namespace Bevasarlo
             this.Mennyiseg = 1;
             this.MennyisegEmelo = this.Mennyiseg;
         }
-
         public void Hozzad()
         {
             this.Mennyiseg += this.MennyisegEmelo;
@@ -42,7 +42,9 @@ namespace Bevasarlo
         }
         public void ListahozAd()
         {
-                string elem = this.Nev + ' ' + this.Mennyiseg + ' ' + this.Mertekegyseg;
+
+            this.ID = termekek.Count + 1;
+            string elem = this.Nev + ' ' + this.Mennyiseg + ' ' + this.Mertekegyseg;
                 if (this.Vegan == true)
                 {
                     elem = elem + ", vegán";
@@ -51,11 +53,10 @@ namespace Bevasarlo
                 {
                     elem = elem + ", gluténmentes";
                 }
-                if (this.Egyeb != "")
+                if (this.Egyeb != null && this.Egyeb != "")
                 {
                     elem = elem + ", " + this.Egyeb;
                 }
-
             this.DisplayMember = elem;
             termekek.Add(this);
 
