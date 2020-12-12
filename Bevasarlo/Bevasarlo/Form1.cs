@@ -23,6 +23,14 @@ namespace Bevasarlo
         Termek termek = new Termek();
         List<string> recept = new List<string>();
 
+        string[] header = new string[] {
+                    "Termék neve",
+                    "Mennyiség",
+                    "Mértékegység",
+                    "Vegán",
+                    "Gluténmentes",
+                    "Egyéb"};
+
         public Form1()
         {
             InitializeComponent();
@@ -32,6 +40,8 @@ namespace Bevasarlo
                                   "Csomagolt élelmiszer",
                                   "Tisztítószer, háztartási kellék"};
 
+
+
             cbTipus.DataSource = tipusok;
 
         }
@@ -39,7 +49,7 @@ namespace Bevasarlo
         private void btnListahoz_Click(object sender, EventArgs e)
         {
             Termek newTermek = new Termek();
-             termek = newTermek; 
+            termek = newTermek;
             cbTermek_SelectedIndexChanged(sender, e);  //need to trigger so the new object is set
             if (cbVegan.Checked == true)
             {
@@ -223,31 +233,11 @@ namespace Bevasarlo
                 return;
             }
 
-            CreateExcel();
 
-            //List<string> lista = new List<string>();
-            //SaveFileDialog sfd = new SaveFileDialog();
-            //sfd.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            //sfd.Filter = "Comma Separated Values (*.csv)|*.csv";
-            //sfd.FileName = "bevasarlolista.csv";
-            //sfd.DefaultExt = "csv";
-            //sfd.AddExtension = true;
-            //if (sfd.ShowDialog() == DialogResult.OK)
-            //{
-            //    try
-            //    {
-            //        foreach (var item in listBoxTermekek.CheckedItems)
-            //        {
-            //            lista.Add(item.ToString());
-            //        }
-            //        File.WriteAllLines(sfd.FileName, lista, Encoding.UTF8);
-            //        MessageBox.Show("Sikeres mentés");
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show("Error: " + ex.Message);
-            //    }
-            //}
+            CreateExcel();
+            CreateTable();
+            FormatTable();
+
         }
         private void CreateExcel()
         {
@@ -256,7 +246,6 @@ namespace Bevasarlo
                 xlApp = new Excel.Application();
                 xlWB = xlApp.Workbooks.Add(Missing.Value);
                 xlSheet = xlWB.ActiveSheet;
-                CreateTable();
                 xlApp.Visible = true;
                 xlApp.UserControl = true;
             }
@@ -273,34 +262,44 @@ namespace Bevasarlo
         }
         private void CreateTable()
         {
-            string[] header = new string[] {
-                    "Termék neve",
-                    "Mennyiség",
-                    "Mértékegység",
-                    "Vegán",
-                    "Gluténmentes"
-                };
+
 
             for (int i = 0; i < header.Length; i++)
             {
                 xlSheet.Cells[1, i + 1] = header[i];
             }
 
-            object[,] values = new object[listBoxTermekek.CheckedItems.Count, header.Length];
+            object[,] values = new object[Termek.termekek.Count, header.Length];
             int counter = 0;
             foreach (var item in Termek.termekek)
             {
                 values[counter, 0] = item.Nev;
                 values[counter, 1] = item.Mennyiseg.ToString();
                 values[counter, 2] = item.Mertekegyseg;
-                values[counter, 3] = item.Vegan;
-                values[counter, 4] = item.Glutenmentes;
+                if (item.Vegan == true)
+                {
+                    values[counter, 3] = "Igen";
+                }
+                else
+                {
+                    values[counter, 3] = "Nem";
+                }
+                if (item.Vegan == true)
+                {
+                    values[counter, 4] = "Igen";
+                }
+                else
+                {
+                    values[counter, 4] = "Nem";
+                }
                 values[counter, 5] = item.Egyeb;
                 counter++;
             }
             xlSheet.get_Range(
                 GetCell(2, 1),
                 GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
+
+
         }
 
         private string GetCell(int x, int y)
@@ -318,10 +317,28 @@ namespace Bevasarlo
             ExcelCoordinate += x.ToString();
 
             return ExcelCoordinate;
-
-
         }
+        private void FormatTable()
+        {
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, header.Length));
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 40;
+            headerRange.Interior.Color = Color.LightSalmon;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
 
+            int lastRowID = xlSheet.UsedRange.Rows.Count;
+            int lastColumnID = xlSheet.UsedRange.Columns.Count;
+            Excel.Range dataRange = xlSheet.get_Range(GetCell(2, 1), GetCell(lastRowID, lastColumnID));
+            dataRange.Cells.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
+            dataRange.BorderAround2(Excel.XlLineStyle.xlContinuous);
+
+            Excel.Range firstColumn = xlSheet.get_Range(GetCell(2, 1), GetCell(lastRowID, 1));
+            firstColumn.Font.Bold = true;
+            firstColumn.Interior.Color = Color.LightBlue;
+        }
 
 
         private void btnRecept_Click(object sender, EventArgs e)
@@ -343,40 +360,44 @@ namespace Bevasarlo
                         while (!reader.EndOfStream)
                         {
 
+                            Termek newTermek = new Termek();
+                            termek = newTermek;
+
                             try
                             {
                                 var line = reader.ReadLine();
                                 if (index != 0)
                                 {
                                     string[] values = line.Split(',');
-                                    termek.Nev = values[0];
-                                    termek.Mennyiseg = int.Parse(values[1]);
-                                    termek.Mertekegyseg = values[2];
+                                    newTermek.Nev = values[0];
+                                    newTermek.Mennyiseg = int.Parse(values[1]);
+                                    newTermek.Mertekegyseg = values[2];
                                     if (values[3] == "igen" || values[3] == "Igen")
                                     {
-                                        termek.Vegan = true;
+                                        newTermek.Vegan = true;
                                     }
                                     else
                                     {
-                                        termek.Vegan = false;
+                                        newTermek.Vegan = false;
                                     }
                                     if (values[4] == "igen" || values[4] == "Igen")
                                     {
-                                        termek.Glutenmentes = true;
+                                        newTermek.Glutenmentes = true;
                                     }
                                     else
                                     {
-                                        termek.Glutenmentes = false;
+                                        newTermek.Glutenmentes = false;
                                     }
                                     if (values[5] != null)
                                     {
-                                        termek.Egyeb = values[5];
+                                        newTermek.Egyeb = values[5];
                                     }
                                     else
                                     {
-                                        termek.Egyeb = "";
+                                        newTermek.Egyeb = "";
                                     }
 
+                                    termek = newTermek;
                                     termek.ListahozAd();
                                     RefreshData();
                                 }
