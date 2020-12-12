@@ -281,14 +281,13 @@ namespace Bevasarlo
         }
         private void CreateTable()
         {
-
-
             for (int i = 0; i < header.Length; i++)
             {
                 xlSheet.Cells[1, i + 1] = header[i];
             }
 
             object[,] values = new object[Termek.termekek.Count, header.Length];
+
             int counter = 0;
             foreach (var item in Termek.termekek)
             {
@@ -317,8 +316,6 @@ namespace Bevasarlo
             xlSheet.get_Range(
                 GetCell(2, 1),
                 GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
-
-
         }
 
         private string GetCell(int x, int y)
