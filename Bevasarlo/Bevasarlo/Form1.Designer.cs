@@ -32,7 +32,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbMennyi = new System.Windows.Forms.TextBox();
             this.btnPlus = new System.Windows.Forms.Button();
-            this.btnMinus = new System.Windows.Forms.Button();
             this.cbVegan = new System.Windows.Forms.CheckBox();
             this.cbGluten = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,6 +49,7 @@
             this.labelMennyiseg = new System.Windows.Forms.Label();
             this.btnRecept = new System.Windows.Forms.Button();
             this.btnMentes = new System.Windows.Forms.Button();
+            this.btnMinus = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -76,26 +76,18 @@
             this.tbMennyi.Name = "tbMennyi";
             this.tbMennyi.Size = new System.Drawing.Size(43, 22);
             this.tbMennyi.TabIndex = 2;
+            this.tbMennyi.TextChanged += new System.EventHandler(this.tbMennyi_TextChanged);
             // 
             // btnPlus
             // 
-            this.btnPlus.Location = new System.Drawing.Point(150, 156);
+            this.btnPlus.Enabled = false;
+            this.btnPlus.Location = new System.Drawing.Point(134, 157);
             this.btnPlus.Name = "btnPlus";
-            this.btnPlus.Size = new System.Drawing.Size(23, 23);
+            this.btnPlus.Size = new System.Drawing.Size(26, 25);
             this.btnPlus.TabIndex = 4;
             this.btnPlus.Text = "+";
             this.btnPlus.UseVisualStyleBackColor = true;
             this.btnPlus.Click += new System.EventHandler(this.btnPlus_Click);
-            // 
-            // btnMinus
-            // 
-            this.btnMinus.Location = new System.Drawing.Point(179, 156);
-            this.btnMinus.Name = "btnMinus";
-            this.btnMinus.Size = new System.Drawing.Size(23, 23);
-            this.btnMinus.TabIndex = 5;
-            this.btnMinus.Text = "-";
-            this.btnMinus.UseVisualStyleBackColor = true;
-            this.btnMinus.Click += new System.EventHandler(this.btnMinus_Click);
             // 
             // cbVegan
             // 
@@ -261,11 +253,23 @@
             this.btnMentes.UseVisualStyleBackColor = true;
             this.btnMentes.Click += new System.EventHandler(this.btnMentes_Click);
             // 
+            // btnMinus
+            // 
+            this.btnMinus.Enabled = false;
+            this.btnMinus.Location = new System.Drawing.Point(176, 156);
+            this.btnMinus.Name = "btnMinus";
+            this.btnMinus.Size = new System.Drawing.Size(26, 25);
+            this.btnMinus.TabIndex = 28;
+            this.btnMinus.Text = "-";
+            this.btnMinus.UseVisualStyleBackColor = true;
+            this.btnMinus.Click += new System.EventHandler(this.btnMinus_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(905, 450);
+            this.Controls.Add(this.btnMinus);
             this.Controls.Add(this.btnMentes);
             this.Controls.Add(this.btnRecept);
             this.Controls.Add(this.labelMennyiseg);
@@ -283,7 +287,6 @@
             this.Controls.Add(this.tbEgyeb);
             this.Controls.Add(this.cbGluten);
             this.Controls.Add(this.cbVegan);
-            this.Controls.Add(this.btnMinus);
             this.Controls.Add(this.btnPlus);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbMennyi);
@@ -300,7 +303,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbMennyi;
         private System.Windows.Forms.Button btnPlus;
-        private System.Windows.Forms.Button btnMinus;
         private System.Windows.Forms.CheckBox cbVegan;
         private System.Windows.Forms.CheckBox cbGluten;
         private System.Windows.Forms.Label label3;
@@ -318,6 +320,7 @@
         private System.Windows.Forms.Label labelMennyiseg;
         private System.Windows.Forms.Button btnRecept;
         private System.Windows.Forms.Button btnMentes;
+        private System.Windows.Forms.Button btnMinus;
     }
 }
 

@@ -25,6 +25,7 @@ namespace Bevasarlo.Entities
             {
                 this.Mertekegyseg = "csomag";
             }
+            this.MennyisegEmelo = this.Mennyiseg;
         }
     }
 }

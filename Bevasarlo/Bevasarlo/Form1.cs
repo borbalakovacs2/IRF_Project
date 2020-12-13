@@ -43,7 +43,6 @@ namespace Bevasarlo
 
 
             cbTipus.DataSource = tipusok;
-
         }
 
         private void btnListahoz_Click(object sender, EventArgs e)
@@ -84,6 +83,7 @@ namespace Bevasarlo
 
             termek.ListahozAd();
             RefreshData();
+            
 
         }
 
@@ -464,6 +464,15 @@ namespace Bevasarlo
             labelMennyiseg.Visible = false;
             btnPlus.Enabled = false;
             btnMinus.Enabled = false;
+            cbTipus.Text = "";
+        }
+
+        private void tbMennyi_TextChanged(object sender, EventArgs e)
+        {
+            if (int.Parse(tbMennyi.Text) < 1)
+            {
+                tbMennyi.Text = 1.ToString();
+            }
         }
     }
 }

@@ -11,7 +11,9 @@ namespace Bevasarlo.Entities
         public Haztartasi(string nev)
         {
             this.Nev = nev;
+            this.Mennyiseg = 1;
             this.Mertekegyseg = "csomag";
+            this.MennyisegEmelo = this.Mennyiseg;
         }
     }
 }

@@ -27,10 +27,6 @@ namespace Bevasarlo
         public string Egyeb { get; set; }
         public string DisplayMember { get; set; }
 
-        public Termek()
-        {
-            this.MennyisegEmelo = this.Mennyiseg;
-        }
         public void Hozzad()
         {
             this.Mennyiseg += this.MennyisegEmelo;

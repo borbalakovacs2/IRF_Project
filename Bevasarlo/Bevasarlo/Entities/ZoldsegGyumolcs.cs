@@ -21,6 +21,7 @@ namespace Bevasarlo.Entities
             {
                 this.Mertekegyseg = "kg";
             }
+            this.MennyisegEmelo = this.Mennyiseg;
         }
     }
 }
