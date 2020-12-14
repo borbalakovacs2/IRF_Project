@@ -84,17 +84,17 @@ namespace Bevasarlo
 
             termek.ListahozAd();
             RefreshData();
+            cbGluten.Checked = false;
+            cbVegan.Checked = false;
+            tbEgyeb.Text = "";
+            egyedi = false;
 
-            
 
         }
 
         private void cbTipus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cbGluten.Checked = false;
-            cbVegan.Checked = false;
-            tbEgyeb.Text = "";
-            egyedi = false;
+            
             switch (cbTipus.SelectedIndex)
             {
                 case (int)Tipusok.Pektermek:
