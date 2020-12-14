@@ -19,7 +19,7 @@ namespace Bevasarlo
         Excel.Application xlApp;
         Excel.Workbook xlWB;
         Excel.Worksheet xlSheet;
-
+        bool egyedi;
         Termek termek = new Termek();
         List<string> recept = new List<string>();
 
@@ -50,8 +50,8 @@ namespace Bevasarlo
             Termek newTermek = new Termek();
             termek = newTermek;
             termek.Nev = cbTermek.Text;
-            bool egyedi = IsDigitsOnly(tbMennyi.Text);
-            if (egyedi == true) {
+            bool csakszam = IsDigitsOnly(tbMennyi.Text);
+            if (csakszam == true) {
                 termek.Mennyiseg = int.Parse(tbMennyi.Text);
             }
             else
@@ -61,7 +61,7 @@ namespace Bevasarlo
                 termek.Mertekegyseg = mennyi[1];
                 Console.WriteLine(mennyi.ToString(), tbMennyi.Text);
             }
-            cbTermek_SelectedIndexChanged(sender, e);  //need to trigger so the new object is set
+            cbTermek_SelectedIndexChanged(sender, e);
             if (cbVegan.Checked == true)
             {
                 termek.Vegan = true;
@@ -83,6 +83,7 @@ namespace Bevasarlo
 
             termek.ListahozAd();
             RefreshData();
+
             
 
         }
@@ -92,6 +93,7 @@ namespace Bevasarlo
             cbGluten.Checked = false;
             cbVegan.Checked = false;
             tbEgyeb.Text = "";
+            egyedi = false;
             switch (cbTipus.SelectedIndex)
             {
                 case (int)Tipusok.Pektermek:
@@ -446,7 +448,8 @@ namespace Bevasarlo
         {
             cbTermek.DataSource = null;
             cbTermek_TextUpdate(sender, e);
-            
+            egyedi = true;
+
         }
         private bool IsDigitsOnly(string str)
         {
@@ -465,13 +468,17 @@ namespace Bevasarlo
             btnPlus.Enabled = false;
             btnMinus.Enabled = false;
             cbTipus.Text = "";
+            egyedi = true;
         }
 
         private void tbMennyi_TextChanged(object sender, EventArgs e)
         {
-            if (int.Parse(tbMennyi.Text) < 1)
+            if (egyedi == false)
             {
-                tbMennyi.Text = 1.ToString();
+                if (int.Parse(tbMennyi.Text) < 1)
+                {
+                    tbMennyi.Text = 1.ToString();
+                }
             }
         }
     }
