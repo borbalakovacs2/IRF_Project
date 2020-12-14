@@ -47,21 +47,22 @@ namespace Bevasarlo
 
         private void btnListahoz_Click(object sender, EventArgs e)
         {
+            string mennyiseg = tbMennyi.Text;
             Termek newTermek = new Termek();
             termek = newTermek;
+            cbTermek_SelectedIndexChanged(sender, e);
             termek.Nev = cbTermek.Text;
-            bool csakszam = IsDigitsOnly(tbMennyi.Text);
-            if (csakszam == true) {
-                termek.Mennyiseg = int.Parse(tbMennyi.Text);
+            bool csakszam = IsDigitsOnly(mennyiseg);
+            if (csakszam == true)
+            {
+                termek.Mennyiseg = int.Parse(mennyiseg);
             }
             else
             {
-                var mennyi = tbMennyi.Text.Split(' ');
-                termek.Mennyiseg = int.Parse(mennyi[0]);
-                termek.Mertekegyseg = mennyi[1];
-                Console.WriteLine(mennyi.ToString(), tbMennyi.Text);
+                var mennyiMertek = mennyiseg.Split(' ');
+                termek.Mennyiseg = int.Parse(mennyiMertek[0]);
+                termek.Mertekegyseg = mennyiMertek[1];
             }
-            cbTermek_SelectedIndexChanged(sender, e);
             if (cbVegan.Checked == true)
             {
                 termek.Vegan = true;
@@ -142,7 +143,6 @@ namespace Bevasarlo
                     termek = haztartasi;
                     break;
             }
-
             tbMennyi.Text = termek.Mennyiseg.ToString();
             labelMennyiseg.Text = termek.Mertekegyseg;
         }
