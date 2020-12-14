@@ -137,6 +137,7 @@
             // 
             // listBoxTermekek
             // 
+            this.listBoxTermekek.CheckOnClick = true;
             this.listBoxTermekek.FormattingEnabled = true;
             this.listBoxTermekek.Location = new System.Drawing.Point(375, 21);
             this.listBoxTermekek.Name = "listBoxTermekek";

@@ -231,17 +231,19 @@ namespace Bevasarlo
 
         private void btnTorles_Click(object sender, EventArgs e)
         {
-            List<Termek> toRemove = new List<Termek>();
-            int[] currentSelectedValue = new int[this.listBoxTermekek.CheckedItems.Count];
-            for (int i = 0; i < listBoxTermekek.CheckedItems.Count; i++)
+            if (listBoxTermekek.CheckedItems.Count > 0)
             {
-                termek = (Termek)listBoxTermekek.CheckedItems[i];
-                Termek.termekek.RemoveAt(termek.ID);
-                for (int j = 0; j < Termek.termekek.Count; j++)
+                for (int i = 0; i < listBoxTermekek.CheckedItems.Count; i++)
                 {
-                    Termek.termekek[j].ID = j;
+                    termek = (Termek)listBoxTermekek.CheckedItems[i];
+                    Termek.termekek.RemoveAt(termek.ID);
+                    for (int j = 0; j < Termek.termekek.Count; j++)
+                    {
+                        Termek.termekek[j].ID = j;
+                    }
                 }
             }
+            
             RefreshData();
         }
 
@@ -438,10 +440,12 @@ namespace Bevasarlo
 
         private void RefreshData()
         {
+            listBoxTermekek.SelectionMode = SelectionMode.None;
             listBoxTermekek.DataSource = null;
             listBoxTermekek.DataSource = Termek.termekek;
             listBoxTermekek.DisplayMember = "DisplayMember";
             listBoxTermekek.ValueMember = "ID";
+            listBoxTermekek.SelectionMode = SelectionMode.One;
         }
 
         private void cbTipus_TextUpdate(object sender, EventArgs e)
