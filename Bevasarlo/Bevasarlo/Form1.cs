@@ -39,58 +39,10 @@ namespace Bevasarlo
                                   "Zöldség, gyümölcs",
                                   "Csomagolt élelmiszer",
                                   "Tisztítószer, háztartási kellék"};
-
-
-
             cbTipus.DataSource = tipusok;
         }
 
-        private void btnListahoz_Click(object sender, EventArgs e)
-        {
-            string mennyiseg = tbMennyi.Text;
-            Termek newTermek = new Termek();
-            termek = newTermek;
-            cbTermek_SelectedIndexChanged(sender, e);
-            termek.Nev = cbTermek.Text;
-            bool csakszam = IsDigitsOnly(mennyiseg);
-            if (csakszam == true)
-            {
-                termek.Mennyiseg = int.Parse(mennyiseg);
-            }
-            else
-            {
-                var mennyiMertek = mennyiseg.Split(' ');
-                termek.Mennyiseg = int.Parse(mennyiMertek[0]);
-                termek.Mertekegyseg = mennyiMertek[1];
-            }
-            if (cbVegan.Checked == true)
-            {
-                termek.Vegan = true;
-            }
-            else
-            {
-                termek.Vegan = false;
-            }
-            if (cbGluten.Checked == true)
-            {
-                termek.Glutenmentes = true;
-            }
-            else
-            {
-                termek.Glutenmentes = false;
-            }
-            termek.Egyeb = tbEgyeb.Text;
-
-
-            termek.ListahozAd();
-            RefreshData();
-            cbGluten.Checked = false;
-            cbVegan.Checked = false;
-            tbEgyeb.Text = "";
-            egyedi = false;
-
-
-        }
+        
 
         private void cbTipus_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -157,6 +109,128 @@ namespace Bevasarlo
         {
             termek.Kivon();
             tbMennyi.Text = termek.Mennyiseg.ToString();
+        }
+
+        private void btnListahoz_Click(object sender, EventArgs e)
+        {
+            string mennyiseg = tbMennyi.Text;
+            Termek newTermek = new Termek();
+            termek = newTermek;
+            cbTermek_SelectedIndexChanged(sender, e);
+            termek.Nev = cbTermek.Text;
+            bool csakszam = IsDigitsOnly(mennyiseg);
+            if (csakszam == true)
+            {
+                termek.Mennyiseg = int.Parse(mennyiseg);
+            }
+            else
+            {
+                var mennyiMertek = mennyiseg.Split(' ');
+                termek.Mennyiseg = int.Parse(mennyiMertek[0]);
+                termek.Mertekegyseg = mennyiMertek[1];
+            }
+            if (cbVegan.Checked == true)
+            {
+                termek.Vegan = true;
+            }
+            else
+            {
+                termek.Vegan = false;
+            }
+            if (cbGluten.Checked == true)
+            {
+                termek.Glutenmentes = true;
+            }
+            else
+            {
+                termek.Glutenmentes = false;
+            }
+            termek.Egyeb = tbEgyeb.Text;
+
+
+            termek.ListahozAd();
+            RefreshData();
+            cbGluten.Checked = false;
+            cbVegan.Checked = false;
+            tbEgyeb.Text = "";
+            egyedi = false;
+        }
+        
+        private void btnRecept_Click(object sender, EventArgs e)
+        {
+
+            {
+                var documentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.InitialDirectory = documentPath;
+                ofd.Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    var filePath = ofd.FileName;
+                    var fileStream = ofd.OpenFile();
+                    using (StreamReader reader = new StreamReader(fileStream))
+                    {
+                        int index = 0;
+                        while (!reader.EndOfStream)
+                        {
+
+                            Termek newTermek = new Termek();
+                            termek = newTermek;
+
+                            try
+                            {
+                                var line = reader.ReadLine();
+                                if (index != 0)
+                                {
+                                    string[] values = line.Split(',');
+                                    newTermek.Nev = values[0];
+                                    if (values[1] != "")
+                                    {
+                                        newTermek.Mennyiseg = int.Parse(values[1]);
+                                    }
+                                    newTermek.Mertekegyseg = values[2];
+                                    if (values[3] == "igen" || values[3] == "Igen")
+                                    {
+                                        newTermek.Vegan = true;
+                                    }
+                                    else
+                                    {
+                                        newTermek.Vegan = false;
+                                    }
+                                    if (values[4] == "igen" || values[4] == "Igen")
+                                    {
+                                        newTermek.Glutenmentes = true;
+                                    }
+                                    else
+                                    {
+                                        newTermek.Glutenmentes = false;
+                                    }
+                                    if (values[5] != null)
+                                    {
+                                        newTermek.Egyeb = values[5];
+                                    }
+                                    else
+                                    {
+                                        newTermek.Egyeb = "";
+                                    }
+
+                                    termek = newTermek;
+                                    termek.ListahozAd();
+                                    RefreshData();
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.ToString());
+                            }
+                            index++;
+                        }
+                    }
+
+                }
+
+            }
         }
 
         private void cbMind_CheckedChanged(object sender, EventArgs e)
@@ -243,7 +317,8 @@ namespace Bevasarlo
                     }
                 }
             }
-            
+            cbGlutenSelect.Checked = false;
+            cbVeganSelect.Checked = false;
             RefreshData();
         }
 
@@ -361,82 +436,6 @@ namespace Bevasarlo
         }
 
 
-        private void btnRecept_Click(object sender, EventArgs e)
-        {
-
-            {
-                var documentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.InitialDirectory = documentPath;
-                ofd.Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*";
-
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    var filePath = ofd.FileName;
-                    var fileStream = ofd.OpenFile();
-                    using (StreamReader reader = new StreamReader(fileStream))
-                    {
-                        int index = 0;
-                        while (!reader.EndOfStream)
-                        {
-
-                            Termek newTermek = new Termek();
-                            termek = newTermek;
-
-                            try
-                            {
-                                var line = reader.ReadLine();
-                                if (index != 0)
-                                {
-                                    string[] values = line.Split(',');
-                                    newTermek.Nev = values[0];
-                                    if (values[1] != "")
-                                    {
-                                        newTermek.Mennyiseg = int.Parse(values[1]);
-                                    }
-                                    newTermek.Mertekegyseg = values[2];
-                                    if (values[3] == "igen" || values[3] == "Igen")
-                                    {
-                                        newTermek.Vegan = true;
-                                    }
-                                    else
-                                    {
-                                        newTermek.Vegan = false;
-                                    }
-                                    if (values[4] == "igen" || values[4] == "Igen")
-                                    {
-                                        newTermek.Glutenmentes = true;
-                                    }
-                                    else
-                                    {
-                                        newTermek.Glutenmentes = false;
-                                    }
-                                    if (values[5] != null)
-                                    {
-                                        newTermek.Egyeb = values[5];
-                                    }
-                                    else
-                                    {
-                                        newTermek.Egyeb = "";
-                                    }
-
-                                    termek = newTermek;
-                                    termek.ListahozAd();
-                                    RefreshData();
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(ex.ToString());
-                            }
-                            index++;
-                        }
-                    }
-
-                }
-
-            }
-        }
 
         private void RefreshData()
         {
